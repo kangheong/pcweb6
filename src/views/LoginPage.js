@@ -1,16 +1,25 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Form,Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
 export default function LoginPage() {
+  const [user, loading] = useAuthState(auth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (loading) return;
+    if (user) return navigate("/");
+  }, [navigate, user, loading]);
+
   return (
+    <>
     <Container>
       <h1 className="my-3">Login to your account</h1>
       <Form>
@@ -56,5 +65,6 @@ export default function LoginPage() {
       </Form>
       <p>{error}</p>
     </Container>
+    </>
   );
 }

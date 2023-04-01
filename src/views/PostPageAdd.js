@@ -29,15 +29,6 @@ export default function PostPageAdd() {
 
   return (
     <>
-      <Navbar variant="light" bg="light">
-        <Container>
-          <Navbar.Brand href="/">Tinkergram</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/add">New Post</Nav.Link>
-            <Nav.Link onClick={(e) => signOut(auth) }>🚪</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
       <Container>
         <h1 style={{ marginBlock: "1rem" }}>Add Post</h1>
         <Form>
